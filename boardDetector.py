@@ -1,4 +1,6 @@
+import logging
 from pynput.mouse import Listener as listen
+from pynput.mouse import Controller
 
 
 class BoardDetector():
@@ -6,10 +8,12 @@ class BoardDetector():
     def onClick(x, y, button, pressed):
         global myX
         global myY
+        mouse = Controller()
+
         if pressed:
-            myX = x
-            myY = y
-            print("Detected:\tx:{0} y:{1}".format(x,y))
+            myX = mouse.position[0]
+            myY = mouse.position[1]
+            logging.info("Detected:\tx:{0} y:{1}".format(x,y))
             return False
 
 
